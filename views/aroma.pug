@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  h1= title
+  - 
+   let results =[
+      {
+        "aroma-name": "fresh",
+        "brand": "Unpredictable",
+        "price": 54.99
+      },
+      {
+        "aroma-name": "musk",
+        "brand": "Oak",
+        "price": 109.99
+      },
+      {
+        "aroma-name": "floral",
+        "brand": "Versace",
+        "price": 89.99
+      },
+      {
+        "aroma-name": "sweet",
+        "brand": "Delice Vole",
+        "price": 59.99
+      },
+      {
+        "aroma-name": "citrus",
+        "brand": "Merazeur",
+        "price": 55.99
+      }
+    ]
+  .container-fluid 
+    .row 
+      each aroma in results
+        div(class="col-sm-2" onclick=`buy(${results.indexOf(aroma)})`) 
+          each value,key in aroma 
+            = key+" : "+value
+            br
+  script.
+    function buy(index){
+      alert("You purchased item "+index)
+    }
