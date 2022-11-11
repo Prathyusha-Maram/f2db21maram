@@ -12,10 +12,18 @@ exports.aroma_list = async function(req, res) {
     }   
 };
  
-// for a specific Aroma. 
-exports.aroma_detail = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Aroma detail: ' + req.params.id); 
+// for a specific aroma. 
+exports.aroma_detail = async function(req, res) {     
+    console.log("detail"  + req.params.id)     
+    try { 
+        result = await aroma.findById( req.params.id)         
+    res.send(result)     } 
+    catch (error) {         
+        res.status(500) 
+    res.send(`{"error": document for id ${req.params.id} not found`); 
+} 
 }; 
+
  
 // Handle Aroma create on POST. 
 exports.aroma_create_post = async function(req, res) { 
@@ -37,16 +45,36 @@ exports.aroma_create_post = async function(req, res) {
         res.send(`{"error": ${err}}`); 
     }   
 }; 
+
  
 // Handle Aroma delete form on DELETE. 
 exports.aroma_delete = function(req, res) { 
     res.send('NOT IMPLEMENTED: Aroma delete DELETE ' + req.params.id); 
 }; 
  
-// Handle Aroma update form on PUT. 
-exports.aroma_update_put = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Aroma update PUT' + req.params.id); 
+// Handle aroma update form on PUT. 
+exports.aroma_update_put = async function(req, res) {     
+    console.log(`update on id ${req.params.id} with body 
+${JSON.stringify(req.body)}`)     
+try { 
+        let toUpdate = await aroma.findById( req.params.id) 
+        // Do updates of properties         
+                if(req.body.aroma_name)  
+                    toUpdate.aroma_name = req.body.aroma_name;        
+                if(req.body.brand) 
+                    toUpdate.brand = req.body.brand;         
+                if(req.body.price) 
+                    toUpdate.price = req.body.price;         
+                let result = await toUpdate.save();         
+                console.log("Sucess " + result) 
+                res.send(result)     
+    } 
+        catch (err) {         
+            res.status(500)         
+            res.send(`{"error": ${err}: Update for id ${req.params.id} failed`); 
+    } 
 }; 
+
 // List of all Aroma 
 
 // VIEWS 
