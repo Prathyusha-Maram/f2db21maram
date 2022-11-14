@@ -2,48 +2,13 @@ extends layout
 
 block content
   h1= title
-  - 
-   let results =[
-      {
-        "aroma_name": "fresh",
-        "brand": "Unpredictable",
-        "price": 54.99
-      },
-      {
-        "aroma_name": "musk",
-        "brand": "Oak",
-        "price": 109.99
-      },
-      {
-        "aroma_name": "floral",
-        "brand": "Versace",
-        "price": 89.99
-      },
-      {
-        "aroma_name": "sweet",
-        "brand": "Delice Vole",
-        "price": 59.99
-      },
-      {
-        "aroma_name": "citrus",
-        "brand": "Merazeur",
-        "price": 55.99
-      },
-      {
-        "_id": "636c90239a3de4d07a0d32f1",
-        "aroma_name": "oud",
-        "brand": "Oak_oud",
-        "price": 109.99,
-        "__v": 0
-      }
-    ]
-  .container-fluid 
-    .row 
-      each aroma in results
-        div(class="col-sm-2" onclick=`buy(${results.indexOf(aroma)})`) 
-          each value,key in aroma 
-            = key+" : "+value
+  .container-fluid
+    .row
+      each value,key in results
+        div(class="col-sm-2" onclick=`buy(${key})`)
+            = value.aroma_name+" "+value.brand+" "+value.price
             br
+
   script.
     function buy(index){
       alert("You purchased item "+index)
