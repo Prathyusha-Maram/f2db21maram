@@ -48,9 +48,19 @@ exports.aroma_create_post = async function(req, res) {
 
  
 // Handle Aroma delete form on DELETE. 
-exports.aroma_delete = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Aroma delete DELETE ' + req.params.id); 
+exports.aroma_delete = async function(req, res) {     
+    console.log("delete "  + req.params.id)     
+    try { 
+        result = await aroma.findByIdAndDelete( req.params.id)         
+        console.log("Removed " + result) 
+        res.send(result)     
+    } 
+    catch (err) {         
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
 }; 
+
  
 // Handle aroma update form on PUT. 
 exports.aroma_update_put = async function(req, res) {     
