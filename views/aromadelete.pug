@@ -1,0 +1,53 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let aromaid = toShow._id 
+    - let aroma_name = toShow.aroma_name
+    - let Brand = toShow.brand 
+    - let Price = toShow.price 
+    - let actionid = "/resource/aroma/" + aromaid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='aromaAttr mr-3') aroma ID is: 
+        div #{aromaid} 
+      div.row 
+        div(class='aromaAttr mr-3') aroma Name is: 
+        div #{aroma_name} 
+      div.row 
+        div(class='aromaAttr mr-3') aroma brand is: 
+        div #{Brand} 
+      div.row 
+        div(class='aromaAttr mr-3') aroma price is: 
+        div #{Price} 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the aroma collection 
+      window.location.href='/aroma' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'   
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/aroma' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 

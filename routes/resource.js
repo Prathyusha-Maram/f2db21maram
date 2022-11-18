@@ -26,5 +26,6 @@ router.get('/aroma/:id', aroma_controller.aroma_detail);
  
 // GET request for list of all Aroma items. 
 router.get('/aroma', aroma_controller.aroma_list); 
+
  
 module.exports = router; 

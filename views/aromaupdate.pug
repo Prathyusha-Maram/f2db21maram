@@ -1,0 +1,43 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let aromaid = toShow._id 
+  - let aroma_name = toShow.aroma_name 
+  - let aromabrand = toShow.brand 
+  - let aromaprice = toShow.price 
+   
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{aromaid} 
+  - let actionid = "/resource/aroma/" + aromaid 
+  form(id='aromaForm', action= actionid, method="PUT") 
+    div.form-group 
+        label.aromaAttr(for='aroma_Name') aroma Name 
+        input#aroma_Name(class="bg-light border border-dark rounded-3 shadow-lg p-2 d-grid gap-3 text-dark" type='text', name='aroma_name', value= aroma_name ) 
+    div.form-group 
+        label.aromaAttr(for='brand') aroma brand 
+        input#brand(class="bg-light border border-dark rounded-3 shadow-lg p-2 d-grid gap-3 text-dark" type='text', name='brand', value= aromabrand ) 
+    div.form-group 
+        label.aromaAttr(for='price') aroma price 
+        input#price(class="bg-light border border-dark rounded-3 shadow-lg p-2 d-grid gap-3 text-dark" type='number', name='price', value= aromaprice ) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['aromaForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    }); 

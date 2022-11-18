@@ -1,0 +1,22 @@
+extends layout 
+ 
+block content 
+  h1(class='head')= title 
+ 
+  - let aromaid = toShow._id 
+  - let aroma_name = toShow.aroma_name 
+  - let Brand = toShow.brand 
+  - let Price = toShow.price 
+  div 
+    div.row 
+      div(class='aromaAttr mr-3 bg-light border border-danger rounded-2 shadow p-2  text-dark') aroma ID is: 
+      div(class='aromaAttr mr-3  bg-warning border border-danger rounded-2 shadow p-2  text-danger') #{aromaid} 
+    div.row 
+      div(class='aromaAttr mr-3 bg-light border border-danger rounded-3 shadow p-2  text-dark') aroma Name is: 
+      div(class='aromaAttr mr-3 bg-warning border border-danger rounded-2 shadow p-2   text-danger') #{aroma_name} 
+    div.row 
+      div(class='aromaAttr mr-3 bg-light border border-danger rounded-3 shadow p-2  text-dark') aroma brand is: 
+      div(class='pizzaAttr mr-3 bg-warning border border-danger rounded-2 shadow p-2  text-danger') #{Brand} 
+    div.row 
+      div(class='aromaAttr mr-3 bg-light border border-danger rounded-3 shadow p-2  text-dark') aroma price is: 
+      div(class='aromaAttr mr-3 bg-warning border border-danger rounded-2 shadow p-2  text-danger') #{Price} 
