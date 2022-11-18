@@ -3,11 +3,19 @@ extends layout
 block content
   h1= title
   .container-fluid
-    .row
+    .row 
+    .m-1
       each value,key in results
+        - let destination = `dispatch(\"/aroma/update?id=${value._id}\")`
         div(class="col-sm-2" onclick=`buy(${key})`)
             = value.aroma_name+" "+value.brand+" "+value.price
             br
+        button.btn( class="btn-sm btn-outline-white btn-success  ml-1", onclick= destination) To Update Records
+
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }      
 
   script.
     function buy(index){
