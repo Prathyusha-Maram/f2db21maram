@@ -1,19 +1,11 @@
 extends layout
-
 block content
-  h1= title
-  p Welcome to #{title}
-  p "Polar bears have black skin. And actually, their fur isn't white—it's see-through, so it appears white as it reflects light."
-  button(type = "submit", class = "btn btn-info btn-sm" onclick = 'doBump()') Press Me 
-  div(id = "bump") Bump the count
-  div(id = "result" style = "font-style = italic")
-  a(href="/aroma") Aroma...Smell the fragrance
-
-  script.
-      var count = 0
-      var bump = 1
-      function doBump(){
-        count = count + bump;
-        bump = bump + 1;
-        result.innerHTML = 'Count '+count+' bump '+bump;
-      }
+ if (!user)
+  a(href="/login") Login
+  br
+  a(href="/register") Register
+ if (user)
+  p You are currently logged in as #{user.username}
+  a(href="/aroma") Take me to aroma
+  br
+  a(href="/logout") Logout
