@@ -2,6 +2,7 @@ extends layout
 
 block content
   h1= title
+  button.btn(class="btn-danger btn-sm ml-1", style="margin: 5px; width: 120px;", onclick=`dispatch(\"/aroma/create\")`) Create
   .container-fluid
     .row 
     .m-1
@@ -10,8 +11,10 @@ block content
         div(class="col-sm-2" onclick=`buy(${key})`)
             = value.aroma_name+" "+value.brand+" "+value.price
             br
-        button.btn( class="btn-sm btn-outline-white btn-success  ml-1", onclick= destination) To Update Records
-
+        button.btn(class="btn-success btn-sm ml-1", style="margin: 5px; width: 120px;", onclick=`dispatch(\"/aroma/detail?id=${value._id}\")`) View
+        button.btn(class="btn-primary btn-sm ml-1", style="margin: 5px; width: 120px;", onclick= `dispatch(\"/aroma/update?id=${value._id}\")`) Update
+        button.btn(class="btn-warning btn-sm ml-1", style="margin: 5px; width: 120px;", onclick= `dispatch(\"/aroma/delete?id=${value._id}\")`) Delete 
+   
   script.
     function dispatch(path){
       window.location.href=path
